@@ -20,21 +20,20 @@ $(document).ready(function() {
       console.log('REQUEST');
     }
     if(category == "RESULT"){
+      console.log('RESULT');
       $("#resultBox").empty();
       $("#resultBox").addClass("resultBox");
       if(req.result.length > 0){
-        var eventCount = 0;
+        var listCount = 0;
         req.result.forEach(function(id){
           var eventTitle = req.dictionary[id].name;
           var imgUrl = req.dictionary[req.dictionary[id].thumb].url.s;
           var author = req.dictionary[req.dictionary[id].author.user[0]].full_name;
-          var className = "event";
-          if(eventCount % 2 === 0 ){
-            className = "odd";
-          }
-          eventCount++;
-          var html = '<div id="resultList" class="'+className+'"><a class="thumbnail" href="#"><img height="42" width="42" src="'+imgUrl+'" /></a><div class="description"><div class="title">'+eventTitle+'</div><div class="author">'+author+'</div></div></div>';
-          $("#resultBox").append(html);
+          var listBlock = listCount % 2 === 0 ? "odd" : "even";
+          var data = {eventTitle,author,imgUrl,listBlock};
+          let searchItem = new EventListItem(data);
+          searchItem.element();
+          listCount++;
         });
       }else{
         $("#resultBox").append('<p class="emptyList"> NO RESULTS FOUND. </p>');
