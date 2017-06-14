@@ -16,13 +16,13 @@
   border-radius: 2;
 }
 
-#resultList {
+.resultList {
     width:100%;
     border-bottom: 1px solid #d3d3d3;
     opacity: 1;
 }
 
-#resultList:hover{
+.resultList:hover{
   opacity: .5;
   cursor: pointer;
 }
@@ -58,4 +58,9 @@
 }
 img {
   margin: 5px 0px 0px 5px;
+}
+
+.active{
+  color: white;
+  background-color: #3498db;
 }

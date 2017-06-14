@@ -20,19 +20,18 @@ $(document).ready(function() {
       console.log('REQUEST');
     }
     if(category == "RESULT"){
-      console.log('RESULT');
       $("#resultBox").empty();
       $("#resultBox").addClass("resultBox");
       if(req.result.length > 0){
-        var listCount = 0;
+        var listCount = 1;
         req.result.forEach(function(id){
+          var listID = listCount;
           var eventTitle = req.dictionary[id].name;
           var imgUrl = req.dictionary[req.dictionary[id].thumb].url.s;
           var author = req.dictionary[req.dictionary[id].author.user[0]].full_name;
           var listBlock = listCount % 2 === 0 ? "odd" : "even";
-          var data = {eventTitle,author,imgUrl,listBlock};
+          var data = {eventTitle,author,imgUrl,listBlock,listID};
           let searchItem = new EventListItem(data);
-          searchItem.element();
           listCount++;
         });
       }else{

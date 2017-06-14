@@ -3,20 +3,29 @@
 class EventListItem {
     constructor(data){
       this.data = data;
+      this.element = '<div id="item-list-'+this.data.listID+'" class="resultList '+this.data.listBlock+'"><a class="thumbnail" href="#"><img height="42" width="42" src="'+this.data.imgUrl+'" /></a><div class="description"><div class="title">'+this.data.eventTitle+'</div><div class="author">'+this.data.author+'</div></div></div>';
+      $("#resultBox").append(this.element);
+      var i = 'item-list-'+this.data.listID;
+      document.getElementById(i).addEventListener("click", (e) => { this.onClick(i); });
     }
 
-    element(){
-      var eventTitle = this.data.eventTitle;
-      var author = this.data.author;
-      var imgUrl = this.data.imgUrl;
-      var listBlock = this.data.listBlock;
-      var html = '<div id="resultList" class="'+listBlock+'"><a class="thumbnail" href="#"><img height="42" width="42" src="'+imgUrl+'" /></a><div class="description"><div class="title">'+eventTitle+'</div><div class="author">'+author+'</div></div></div>';
-      $("#resultBox").append(html);
-      console.log("appended");
-    }
 
     showData(){
       alert(JSON.stringify(this.data));
+    }
+
+    onClick(i) {
+      console.log($("#"+i).hasClass('active'));
+      if($("#"+i).hasClass('active')){
+        console.log("active");
+        this.showData();
+        $("#"+i).removeClass('active');
+      }else{
+        console.log("inactive");
+        $(".resultList").siblings().removeClass('active');
+        $("#"+i).addClass('active');
+      }
+
     }
 
 }
